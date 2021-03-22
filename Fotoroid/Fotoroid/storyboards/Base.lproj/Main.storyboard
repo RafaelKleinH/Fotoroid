@@ -95,14 +95,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="A3M-lY-Fos"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vnM-MF-yba">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vnM-MF-yba">
                                     <size key="itemSize" width="60" height="80"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="KDz-7v-bB1">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="KDz-7v-bB1" customClass="EffectCollectionViewCell" customModule="Fotoroid" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wqo-zJ-bGm">
@@ -121,10 +121,16 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="60" height="80"/>
+                                        <connections>
+                                            <outlet property="ivEffect" destination="fUx-Cf-T7g" id="iTU-Vt-fMi"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="McW-30-I7N" id="2uU-kJ-x21"/>
+                                </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ro4-9t-vNH">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ro4-9t-vNH">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="MuH-Je-w5s">
@@ -167,6 +173,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="c56-18-q8C" id="rY3-4f-dbi"/>
+                        <outlet property="ivPhoto" destination="KuM-li-vnf" id="1Mo-U6-i9z"/>
+                        <outlet property="viLoading" destination="Ro4-9t-vNH" id="6m9-RZ-aOO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HP5-y4-HUS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -197,6 +208,9 @@
                                 <state key="normal" title="Salvar no Álbum">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="save:" destination="cUA-JL-QPh" eventType="touchUpInside" id="e63-Uh-DJq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SyJ-n9-Z11">
                                 <rect key="frame" x="24" y="583" width="327" height="40"/>
@@ -208,6 +222,9 @@
                                 <state key="normal" title="Começar novamente">
                                     <color key="titleColor" red="0.9571917808219178" green="0.40397581335616439" blue="0.2559663955479452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="restart:" destination="cUA-JL-QPh" eventType="touchUpInside" id="kU4-IL-ZN0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="i2s-oS-xCV"/>
@@ -228,6 +245,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wKh-wG-sLb"/>
+                    <connections>
+                        <outlet property="ivPhoto" destination="iss-kJ-awQ" id="toV-oQ-GLz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bi-CP-uJb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

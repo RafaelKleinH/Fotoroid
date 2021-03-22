@@ -1,5 +1,5 @@
 //
-//  EfeitosViewController.swift
+//  FinalViewController.swift
 //  Fotoroid
 //
 //  Created by Rafael Hartmann on 18/03/21.
@@ -7,11 +7,17 @@
 
 import UIKit
 
-class EffectsViewController: UIViewController {
+class FinalViewController: UIViewController {
 
+    @IBOutlet weak var ivPhoto: UIImageView!
     
     
-    
+    @IBAction func save(_ sender: UIButton) {
+        
+    }
+    @IBAction func restart(_ sender: UIButton) {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
