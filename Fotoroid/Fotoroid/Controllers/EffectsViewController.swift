@@ -35,7 +35,7 @@ class EffectsViewController: UIViewController {
         
         
     }
-
+    
     func showLoading(_ show: Bool){
         viLoading.isHidden = !show
     
@@ -66,10 +66,15 @@ extension EffectsViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let type = FilterType(rawValue: indexPath.row){
             showLoading(true)
-            let filteredImage = self.filterManager.applyFilter(type: type)
-            self.ivPhoto.image = filteredImage
-            print("Salve primo")
-            showLoading(false)
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let filteredImage = self.filterManager.applyFilter(type: type)
+             
+                DispatchQueue.main.async {
+                    self.ivPhoto.image = filteredImage
+                    self.showLoading(false)
+                }
+            }
         }
     }
 }

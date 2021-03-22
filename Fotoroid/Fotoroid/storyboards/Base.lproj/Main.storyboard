@@ -47,7 +47,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LeN-Se-KVT">
-                        <barButtonItem key="backBarButtonItem" title="FOTO" id="Ofi-uJ-Mo9"/>
+                        <barButtonItem key="backBarButtonItem" title="Foto" id="Ofi-uJ-Mo9"/>
                     </navigationItem>
                     <connections>
                         <segue destination="McW-30-I7N" kind="show" identifier="segueOne" id="K1Y-Rf-WfR"/>
@@ -128,6 +128,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="McW-30-I7N" id="2uU-kJ-x21"/>
+                                    <outlet property="delegate" destination="McW-30-I7N" id="aNZ-ad-MUc"/>
                                 </connections>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ro4-9t-vNH">

@@ -1,10 +1,3 @@
-//
-//  FileManager.swift
-//  Fotoroid
-//
-//  Created by Rafael Hartmann on 18/03/21.
-//
-
 import Foundation
 import UIKit
 
@@ -15,24 +8,22 @@ enum FilterType: Int{
     case crystallize
     case vignette
     case noir
-    
-    
 }
 
 class FileManager {
     
     let originalImage: UIImage
     let context = CIContext(options: nil)
-    let filterNames = ["CIComicEffect","CISepiaTone","CICMYHalftone","CICrystallize","CIVignette","CIPhotoEffectNoir"]
+    let filterNames = ["CIComicEffect","CISepiaTone","CICMYKHalftone","CICrystallize","CIVignette","CIPhotoEffectNoir"]
     
     init(image: UIImage) {
         self.originalImage = image
     }
     
     func applyFilter(type: FilterType) -> UIImage{
-     
+        
         let ciImage = CIImage(image: originalImage)!
-        let filter = CIFilter(name: filterNames[type.hashValue])!
+        let filter = CIFilter(name: filterNames[type.rawValue])!
         filter.setValue(ciImage, forKey: kCIInputImageKey)
         
         switch type{
@@ -41,7 +32,7 @@ class FileManager {
         case .sepia:
             filter.setValue(1.0, forKey: kCIInputIntensityKey)
         case .halftone:
-            filter.setValue(20, forKey: kCIInputWidthKey)
+            filter.setValue(25, forKey: kCIInputWidthKey)
         case.crystallize:
             filter.setValue(25, forKey: kCIInputRadiusKey)
         case .vignette:
@@ -53,7 +44,5 @@ class FileManager {
         let filteredImage = filter.value(forKey: kCIOutputImageKey) as! CIImage
         let cgImage = context.createCGImage(filteredImage, from: filteredImage.extent)
         return UIImage(cgImage: cgImage!)
-        
-        
     }
 }
