@@ -6,34 +6,61 @@
 //
 
 import UIKit
+import Photos
 
 class FinalViewController: UIViewController {
 
+    var image: UIImage!
+    
+    
+    
     @IBOutlet weak var ivPhoto: UIImageView!
     
-    
+    func saveToAlbum() {
+        PHPhotoLibrary.shared().performChanges {
+            
+            let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: self.image)
+            let addAssetRequest = PHAssetCollectionChangeRequest()
+            addAssetRequest.addAssets([creationRequest.placeholderForCreatedAsset] as NSArray)
+            
+        } completionHandler: { (success, error) in
+            if !success {
+                print(error!.localizedDescription)
+            }else{
+                let alert = UIAlertController(title: "Imagem salva", message: "Sua mensagem foi salva", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+
+        
+    }
     @IBAction func save(_ sender: UIButton) {
+        PHPhotoLibrary.requestAuthorization { (status) in
+            switch status{
+            case .authorized:
+                self.saveToAlbum()
+            default:
+                let alert = UIAlertController(title: "ERRO", message: "Você precisa autorizar a galeria para podermos salvar a imagem", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
     }
     @IBAction func restart(_ sender: UIButton) {
+        
+        navigationController?.popToRootViewController(animated: true)
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        ivPhoto.image = image
+        ivPhoto.layer.borderWidth = 10
+        ivPhoto.layer.borderColor = UIColor.white.cgColor
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
